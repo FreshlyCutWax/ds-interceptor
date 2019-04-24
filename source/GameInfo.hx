@@ -1,11 +1,16 @@
 package;
 
-class GameInfo
+import flixel.FlxBasic;
+import flixel.FlxG;
+
+class GameInfo extends FlxBasic
 {
-    public function new():Void{
+    override public function new():Void{
+        super();
     }//constructor
 
     
-    public function update():Void{
+    override public function update(elapsed:Float):Void{
+        super(elapsed);
     }//update loop
 }

@@ -1,19 +1,23 @@
 package;
 
+import flixel.FlxBasic;
 import flixel.input.keyboard.FlxKeyboard;
 
-class InputHandler
+class InputHandler extends FlxBasic;
 {
     /**
      * Flixel class for handling keyboard input.
      * Read-only.
      */
-    public static var keys():FlxKeyboard;
+    private static var _keys():FlxKeyboard;
 
-    public function new():Void{
+
+    override public function new():Void{
+        super();
     }//constructor
 
     
-    public function update():Void{
+    override public function update(elapsed:Float):Void{
+        super(elapsed);
     }//update loop
 }
