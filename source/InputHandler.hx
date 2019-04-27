@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxBasic;
 import flixel.input.keyboard.FlxKeyboard;
+import screen.ship.PlayerShip;
 import command.*;
 
 class InputHandler extends FlxBasic;
@@ -10,7 +11,7 @@ class InputHandler extends FlxBasic;
      * Flixel class for handling keyboard input.
      * Read-only.
      */
-    private static var _keys():FlxKeyboard;
+    private static var _keys(default, null):FlxKeyboard;
 
 
     /**
@@ -44,7 +45,6 @@ class InputHandler extends FlxBasic;
 
     /**
      * Takes keyboard inputs from user and issues commands based on that input.
-     * Input presidence: Down > Up, Left = Right
      */
     public function handleInput():Void{
         //check to see if keys are pressed
@@ -55,14 +55,15 @@ class InputHandler extends FlxBasic;
         //check primary
         //check secondary
 
-        //check for left/right key collision
+        //check for left/right, up/down key collision
         if (_left && _right) _left = _right = false;
+        if (_up && _down) _up = _down = false;
         
         //issue commands
-        if (_up) UpCommand(player);
-        if (_down) DownCommand(player);
-        if (_left) LeftCommand(player);
-        if (_right) RightCommand(player);
+        if (_up) UpCommand.execute(player);
+        if (_down) DownCommand.execute(player);
+        if (_left) LeftCommand.execute(player);
+        if (_right) RightCommand.execute(player);
         //issue primary
         //issue secondary
     }//function handleInput
