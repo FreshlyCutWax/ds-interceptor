@@ -1,19 +1,11 @@
 package;
 
 import flixel.FlxBasic;
-import flixel.input.keyboard.FlxKeyboard;
+import flixel.FlxG;
 import screen.ship.PlayerShip;
-import command.*;
 
-class InputHandler extends FlxBasic;
+class InputHandler extends FlxBasic
 {
-    /**
-     * Flixel class for handling keyboard input.
-     * Read-only.
-     */
-    private static var _keys(default, null):FlxKeyboard;
-
-
     /**
      * Reference to the on-screen player ship object.
      */
@@ -34,11 +26,15 @@ class InputHandler extends FlxBasic;
     override public function new(playerShip:PlayerShip):Void{
         super();
         player = playerShip;
+        _up = false;
+        _down = false;
+        _left = false;
+        _right = false;
     }//constructor
 
     
     override public function update(elapsed:Float):Void{
-        super(elapsed);
+        super.update(elapsed);
         handleInput();
     }//update loop
 
@@ -48,10 +44,10 @@ class InputHandler extends FlxBasic;
      */
     public function handleInput():Void{
         //check to see if keys are pressed
-        _up =  _keys.checkStatus(W, PRESSED);
-        _down =  _keys.checkStatus(S, PRESSED);
-        _left = _keys.checkStatus(A, PRESSED);
-        _right = _keys.checkStatus(D, PRESSED);
+        _up =  FlxG.keys.anyPressed([W, UP]);
+        _down = FlxG.keys.anyPressed([S, DOWN]);
+        _left = FlxG.keys.anyPressed([A, LEFT]);
+        _right = FlxG.keys.anyPressed([D, RIGHT]);
         //check primary
         //check secondary
 
@@ -60,10 +56,10 @@ class InputHandler extends FlxBasic;
         if (_up && _down) _up = _down = false;
         
         //issue commands
-        if (_up) UpCommand.execute(player);
-        if (_down) DownCommand.execute(player);
-        if (_left) LeftCommand.execute(player);
-        if (_right) RightCommand.execute(player);
+        if (_up) Command.up(player);
+        if (_down) Command.down(player);
+        if (_left) Command.left(player);
+        if (_right) Command.right(player);
         //issue primary
         //issue secondary
     }//function handleInput

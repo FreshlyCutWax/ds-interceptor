@@ -7,10 +7,16 @@ class Ship extends FlxSprite
     /**
      * Variable for store sheild health.
      */
-    private var _shield:Float;
+    public var shield:Float;
 
 
-    override public function new(X?:Float, Y?:Float):Void{
+    /**
+     * Used for increasing acceleration.
+     */
+    private var _incrementAccel:Float;
+
+
+    override public function new(?X:Float, ?Y:Float):Void{
         super(X, Y);
         //general
         solid = true;
@@ -27,7 +33,7 @@ class Ship extends FlxSprite
 
     
     override public function update(elapsed:Float):Void{
-        super(elapsed);
+        super.update(elapsed);
     }//update loop
 
 
