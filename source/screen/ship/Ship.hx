@@ -5,15 +5,16 @@ import flixel.FlxSprite;
 class Ship extends FlxSprite
 {
     /**
-     * Variable for store sheild health.
+     * Stores sheild health.
      */
     public var shield:Float;
 
 
     /**
-     * Used for increasing acceleration.
+     * x-axis & y-axis speed.
      */
-    private var _incrementAccel:Float;
+    public var speedX:Float;
+    public var speedY:Float;
 
 
     override public function new(?X:Float, ?Y:Float):Void{
@@ -24,11 +25,9 @@ class Ship extends FlxSprite
         shield = 0;
 
         //speed & direction
-        acceleration.x = 30;
-        acceleration.y = 50;
-        maxVelocity.x = 100;
-        maxVelocity.y = 150;
-        drag.x = drag.y = 20;
+        speedX = 180;
+        speedY = 250;
+        drag.x = drag.y = 300;
     }//constructor
 
     
@@ -44,8 +43,9 @@ class Ship extends FlxSprite
      *                       0 for none.
      */
     public function thrustVertical(direction:Int):Void{
-        velocity.y += velocity.y * direction;
-    }
+        var v = speedY * direction;
+        velocity.y = v;
+    }//function thrustVertical
 
 
     /**
@@ -55,6 +55,7 @@ class Ship extends FlxSprite
      *                       0 for none.
      */
     public function thrustHorizontal(direction:Int):Void{
-        velocity.x += velocity.x * direction;
-    }
+        var v = speedX * direction;
+        velocity.x = v;
+    }//function thrustHorizontal
 }
