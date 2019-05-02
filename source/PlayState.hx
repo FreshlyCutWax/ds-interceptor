@@ -5,6 +5,12 @@ import screen.ship.PlayerShip;
 
 class PlayState extends FlxState
 {
+    /**
+     * Offset of screen bound checking.
+     */
+    public var boundOffset:Int;
+
+
     override public function create():Void{
         var player = new PlayerShip();
         var input = new InputHandler(player);
