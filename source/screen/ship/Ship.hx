@@ -106,7 +106,7 @@ class Ship extends FlxSprite
 
 
     /**
-     * Helper function for _checkBounds(). Checks bounds on x-axis.
+     * Helper method for _checkBounds(). Checks bounds on x-axis.
      */
     private function _checkXAxis():Void{
         if (position.x < _leftBound) position.x = _leftBound;
@@ -115,7 +115,7 @@ class Ship extends FlxSprite
 
 
     /**
-     * Helper function for _checkBounds(). Checks bounds on y-axis.
+     * Helper method for _checkBounds(). Checks bounds on y-axis.
      */
     private function _checkYAxis():Void{
         if (position.y < _upperBound) position.y = _upperBound;
