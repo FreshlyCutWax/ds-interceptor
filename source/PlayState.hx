@@ -2,21 +2,18 @@ package;
 
 import flixel.FlxState;
 import screen.ship.PlayerShip;
+import screen.ui.UI;
 
 class PlayState extends FlxState
 {
-    /**
-     * Offset of screen bound checking.
-     */
-    public var boundOffset:Int;
-
-
     override public function create():Void{
-        var player = new PlayerShip();
+        var player = new PlayerShip(0, 0, 32, 64);
         var input = new InputHandler(player);
+        var ui = new UI(player);
 
         add(player);
         add(input);
+        add(ui);
 	super.create();
     }
 

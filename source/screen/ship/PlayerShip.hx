@@ -4,8 +4,8 @@ import screen.ship.Ship;
 
 class PlayerShip extends Ship
 {
-    override public function new(?X:Float, ?Y:Float){
-        super(X, Y);
+    override public function new(?X:Float, ?Y:Float, ?XBoundOffset:Int, ?YBoundOffset:Int){
+        super(X, Y, XBoundOffset, YBoundOffset);
     }//constructor
 
 

@@ -7,15 +7,9 @@ import flixel.math.FlxPoint;
 class Ship extends FlxSprite
 {
     /**
-     * Position of player in game.
+     * Holds Position object.
      */
-    private var position:FlxPoint; 
-
-
-    /**
-     * Offset of screen bound checking.
-     */
-    public var boundOffset:Int;
+    public var position:FlxPoint;
 
 
     /**
@@ -40,7 +34,7 @@ class Ship extends FlxSprite
     public var speedY:Float;
 
 
-    override public function new(?X:Float, ?Y:Float):Void{
+    override public function new(?X:Float, ?Y:Float, ?XBoundOffset:Int, ?YBoundOffset:Int):Void{
         super(X, Y);
 
         //general
@@ -48,17 +42,14 @@ class Ship extends FlxSprite
         health = 100;
         shield = 0;
 
-        //speed & direction
+        //speed & position
+        position = new FlxPoint();
         speedX = 180;
         speedY = 250;
         drag.x = drag.y = 300;
 
         //screen bounding
-        boundOffset = 32;
-        _leftBound = 0 + boundOffset;
-        _rightBound = FlxG.width - boundOffset;
-        _upperBound = 0 + boundOffset;
-        _lowerBound = FlxG.height - boundOffset;
+        _setBounds(XBoundOffset, YBoundOffset);
     }//constructor
 
     
@@ -66,6 +57,21 @@ class Ship extends FlxSprite
         _checkBounds();
         super.update(elapsed);
     }//update loop
+
+
+    /**
+     * Helper method for setting screen bound parameters.
+     */
+    private function _setBounds(?xOffset:Int, ?yOffset:Int):Void{
+        //default 32 pixels
+        if (xOffset == null) xOffset = 32;
+        if (yOffset == null) yOffset = 32;
+        
+        _leftBound = 0 + xOffset;
+        _rightBound = FlxG.width - xOffset;
+        _upperBound = 0 + yOffset;
+        _lowerBound = FlxG.height - yOffset;
+    }//function _setBounds
 
 
     /**
@@ -96,7 +102,7 @@ class Ship extends FlxSprite
      * Check and corrects when player is out of screen bounds.
      */
     private function _checkBounds():Void{
-        position = getPosition();
+        getPosition(position);
 
         _checkXAxis();
         _checkYAxis();
