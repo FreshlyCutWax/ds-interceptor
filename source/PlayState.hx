@@ -1,23 +1,44 @@
 package;
 
 import flixel.FlxState;
-import screen.ship.PlayerShip;
 import screen.ui.UI;
 
 class PlayState extends FlxState
 {
-    override public function create():Void{
-        var player = new PlayerShip(0, 0, 32, 64);
-        var input = new InputHandler(player);
-        var ui = new UI(player);
+    /**
+     * Stores manager for spawning.
+     */
+    var spawner:Spawner;
 
-        add(player);
+
+    /**
+     * Stores visible ui object.
+     */
+    var ui:UI;
+
+
+    /**
+     * Stores input handler.
+     */
+    var input:InputHandler;
+
+
+    override public function create():Void{
+        //create instances
+        spawner = new Spawner();
+        ui = new UI(spawner.player);
+        input = new InputHandler(spawner.player);
+
+        //add objects to the play state
         add(input);
         add(ui);
+        add(spawner);
+        add(spawner.player);
+        add(spawner.debris);
 	super.create();
     }
 
-    override public function update(elapsed:Float):Void{
+    override public function update(elapsed:Float):Void{    
 	super.update(elapsed);
     }
 }

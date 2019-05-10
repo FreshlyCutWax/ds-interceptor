@@ -4,6 +4,7 @@ import screen.ship.Ship;
 
 class Command
 {
+    /**Ship Commands**/
     public static function up(ship:Ship):Void{
         ship.thrustVertical(-1);
     }
