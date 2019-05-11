@@ -33,8 +33,7 @@ class PlayState extends FlxState
         add(input);
         add(ui);
         add(spawner);
-        add(spawner.player);
-        add(spawner.debris);
+        add(spawner.screenObjects);
 	super.create();
     }
 

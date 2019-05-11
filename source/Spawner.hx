@@ -1,9 +1,13 @@
 package;
 
+//flixel
 import flixel.FlxBasic;
+import flixel.group.FlxGroup;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
 import flixel.FlxG;
+
+//game
 import screen.ship.*;
 import screen.debris.*;
 
@@ -17,6 +21,7 @@ class Spawner extends FlxBasic
     /**
      * Variables for storing game object groups.
      */
+    public var screenObjects:FlxGroup;
     public var debris:FlxTypedGroup<Debris>;
 
 
@@ -25,8 +30,9 @@ class Spawner extends FlxBasic
      */
     private var _debrisSpawnTimer:FlxTimer;
     
-
-    /************methods**************************************************/
+    ///////////////////////////////////////////////////////////////////
+    //////////////////////////////methods//////////////////////////////
+    ///////////////////////////////////////////////////////////////////
     override public function new():Void{
         super();
 
@@ -34,9 +40,19 @@ class Spawner extends FlxBasic
         player = new PlayerShip();
 
         //create groups
+        screenObjects = new FlxGroup();
         debris = new FlxTypedGroup<Debris>();
 
-        _populateGroups();
+        //populate debris
+        for (i in 1...100){
+            var newDebris = new Debris();
+            newDebris.kill();
+            debris.add(newDebris);
+        }
+        
+        //add to screenObjects group
+        screenObjects.add(player);
+        screenObjects.add(debris);
 
         //create timers
         _debrisSpawnTimer = new FlxTimer();
@@ -50,20 +66,6 @@ class Spawner extends FlxBasic
         _checkTimers();
         super.update(elapsed);
     }//update loop
-
-
-    /**
-     * Helper function of constructor.
-     * Used to populate the groups.
-     */
-    private function _populateGroups():Void{
-        //populate debris
-        for (i in 1...100){
-            var newDebris = new Debris();
-            newDebris.kill();
-            debris.add(newDebris);
-        }
-    }//function _populateGroups
 
 
     /**
