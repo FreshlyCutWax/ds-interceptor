@@ -12,6 +12,12 @@ class PlayState extends FlxState
 
 
     /**
+     * Stores collision handler.
+     */
+    var collision:CollisionHandler;
+
+
+    /**
      * Stores visible ui object.
      */
     var ui:UI;
@@ -23,9 +29,13 @@ class PlayState extends FlxState
     var input:InputHandler;
 
 
+    ///////////////////////////////////////////////////////////////////
+    //////////////////////////////methods//////////////////////////////
+    ///////////////////////////////////////////////////////////////////
     override public function create():Void{
         //create instances
         spawner = new Spawner();
+        collision = new CollisionHandler(spawner.screenObjects);
         ui = new UI(spawner.player);
         input = new InputHandler(spawner.player);
 
@@ -33,6 +43,7 @@ class PlayState extends FlxState
         add(input);
         add(ui);
         add(spawner);
+        add(collision);
         add(spawner.screenObjects);
 	super.create();
     }
