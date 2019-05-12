@@ -46,6 +46,7 @@ class PlayState extends FlxState
         add(spawner);
         add(collision);
         add(spawner.screenObjects);
+        add(spawner.projectiles);
 	super.create();
     }
 

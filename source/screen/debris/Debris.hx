@@ -38,10 +38,13 @@ class Debris extends FlxSprite
         //speed
         speed = FlxG.random.int(100, 200);
         velocity.set(0, speed);
+
+        position = new FlxPoint();
     }//constructor
 
     
     override public function update(elapsed:Float):Void{
+        _checkOffScreen();
         super.update(elapsed);
     }//update loop
 
@@ -56,9 +59,9 @@ class Debris extends FlxSprite
     /**
      * Checks to see if off visible screen.
      */
-    public function offscreen():Void{
+    public function _checkOffScreen():Void{
         getPosition(position);
 
-        if (position.y > FlxG.width) kill();
+        if (position.y > FlxG.height) kill();
     }//function offscreen
 }

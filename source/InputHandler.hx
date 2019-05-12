@@ -30,6 +30,7 @@ class InputHandler extends FlxBasic
         _down = false;
         _left = false;
         _right = false;
+        _primary = false;
     }//constructor
 
     
@@ -48,7 +49,7 @@ class InputHandler extends FlxBasic
         _down = FlxG.keys.anyPressed([S, DOWN]);
         _left = FlxG.keys.anyPressed([A, LEFT]);
         _right = FlxG.keys.anyPressed([D, RIGHT]);
-        //check primary
+        _primary = FlxG.keys.anyPressed([SPACE]);
         //check secondary
 
         //check for left/right, up/down key collision
@@ -60,7 +61,7 @@ class InputHandler extends FlxBasic
         if (_down) Command.down(player);
         if (_left) Command.left(player);
         if (_right) Command.right(player);
-        //issue primary
+        if (_primary) Command.firePrimary(player);
         //issue secondary
     }//function handleInput
 }

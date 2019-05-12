@@ -10,6 +10,8 @@ import flixel.FlxG;
 //game
 import screen.ship.*;
 import screen.debris.*;
+import screen.projectile.*;
+import weapon.*;
 
 class Spawner extends FlxBasic
 {
@@ -22,7 +24,9 @@ class Spawner extends FlxBasic
      * Variables for storing game object groups.
      */
     public var screenObjects:FlxGroup;
+    public var projectiles:FlxGroup;
     public var debris:FlxTypedGroup<Debris>;
+    public var bullets:FlxTypedGroup<Bullet>;
 
 
     /**
@@ -30,6 +34,7 @@ class Spawner extends FlxBasic
      */
     private var _debrisSpawnTimer:FlxTimer;
     
+
     ///////////////////////////////////////////////////////////////////
     //////////////////////////////methods//////////////////////////////
     ///////////////////////////////////////////////////////////////////
@@ -41,7 +46,9 @@ class Spawner extends FlxBasic
 
         //create groups
         screenObjects = new FlxGroup();
+        projectiles = new FlxGroup();
         debris = new FlxTypedGroup<Debris>();
+        bullets = new FlxTypedGroup<Bullet>();
 
         //populate debris
         for (i in 1...100){
@@ -49,10 +56,24 @@ class Spawner extends FlxBasic
             newDebris.kill();
             debris.add(newDebris);
         }
+
+        //populate bullets
+        for (i in 1...200){
+            var newBullet = new Bullet();
+            newBullet.kill();
+            bullets.add(newBullet);
+        }
         
         //add to screenObjects group
         screenObjects.add(player);
         screenObjects.add(debris);
+
+        //add to projectiles group
+        projectiles.add(bullets);
+
+        //player setup
+        var defaultWeapon = new Cannon(player, bullets);
+        player.setPrimaryWeapon(defaultWeapon);
 
         //create timers
         _debrisSpawnTimer = new FlxTimer();

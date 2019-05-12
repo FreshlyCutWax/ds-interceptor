@@ -19,9 +19,9 @@ class CollisionHandler extends FlxBasic
     public var damage:Float;
 
 
-    override function new(collisionGroup:FlxGroup):Void{
+    override function new(CollisionGroup:FlxGroup, ?Projectiles:FlxGroup):Void{
         super();
-        _group = collisionGroup;
+        _group = CollisionGroup;
         damage = 25;
     }//constructor
 
