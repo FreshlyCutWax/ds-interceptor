@@ -35,7 +35,7 @@ class PlayState extends FlxState
     override public function create():Void{
         //create instances
         spawner = new Spawner();
-        collision = new CollisionHandler(spawner.screenObjects);
+        collision = new CollisionHandler(spawner.screenObjects, spawner.projectiles);
         ui = new UI(spawner.player);
         input = new InputHandler(spawner.player);
 
