@@ -15,6 +15,10 @@ class PlayerShip extends Ship
 
     override public function new(?X:Float, ?Y:Float, ?XBoundOffset:Int, ?YBoundOffset:Int){
         super(X, Y, XBoundOffset, YBoundOffset);
+
+        loadGraphic(AssetPaths.player__png, true, frameWidth, frameHeight);
+        animation.add("main", [0, 1, 2], 12);
+        animation.play("main");
     }//constructor
 
 

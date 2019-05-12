@@ -3,6 +3,7 @@ package screen.ship;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
+import flixel.util.FlxColor;
 
 class Ship extends FlxSprite
 {
@@ -38,10 +39,14 @@ class Ship extends FlxSprite
         super(X, Y);
 
         //general
-        centerOrigin();
         solid = true;
         health = 100;
         shield = 0;
+
+        //load graphic
+        frameWidth= 32;
+        frameHeight = 32;
+        makeGraphic(frameWidth, frameHeight, FlxColor.CYAN);
 
         //speed & position
         position = new FlxPoint();
