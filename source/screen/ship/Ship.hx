@@ -38,6 +38,7 @@ class Ship extends FlxSprite
         super(X, Y);
 
         //general
+        centerOrigin();
         solid = true;
         health = 100;
         shield = 0;

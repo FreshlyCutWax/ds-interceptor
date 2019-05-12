@@ -59,6 +59,9 @@ class Spawner extends FlxBasic
 
         //start timers
         _debrisSpawnTimer.start();
+
+        //center the player
+        player.screenCenter();
     }//constructor
 
 

@@ -42,6 +42,7 @@ class PlayState extends FlxState
         //add objects to the play state
         add(input);
         add(ui);
+        add(ui.healthText);
         add(spawner);
         add(collision);
         add(spawner.screenObjects);
