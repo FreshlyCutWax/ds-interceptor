@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxState;
+import flixel.FlxSubState;
 import screen.ui.UI;
 
 class PlayState extends FlxState
@@ -9,6 +10,12 @@ class PlayState extends FlxState
      * Player score.
      */
     var score:Int;
+
+    
+    /**
+     * Player lives.
+     */
+    var lives:Int;
 
 
     /**
@@ -41,6 +48,7 @@ class PlayState extends FlxState
     override public function create():Void{
         //set score
         score = 0;
+        lives = 0;
 
         //create instances
         spawner = new Spawner();
@@ -63,6 +71,15 @@ class PlayState extends FlxState
     }
 
     override public function update(elapsed:Float):Void{    
+        checkGameOver();
 	super.update(elapsed);
     }
+
+
+    /**
+     * Check to see if game over condition is met.
+     */
+    public function checkGameOver():Void{
+        if (lives == 0 && !spawner.player.alive) openSubState(new GameOverState());
+    }//function checkGameOver
 }

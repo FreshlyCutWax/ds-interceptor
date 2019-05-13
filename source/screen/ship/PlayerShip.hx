@@ -1,12 +1,20 @@
 package screen.ship;
 
+import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.FlxState;
 import screen.ship.Ship;
 import screen.projectile.*;
 import weapon.*;
 
 class PlayerShip extends Ship
 {
+    /**
+     * Reference to current game state.
+     */
+    private var _state:FlxState;
+
+
     /**
      * The primary weapon.
      */
