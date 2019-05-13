@@ -3,13 +3,20 @@ package;
 import flixel.FlxState;
 import flixel.FlxSubState;
 import screen.ui.UI;
+import screen.ship.PlayerShip;
 
 class PlayState extends FlxState
 {
     /**
+     * Reference to player.
+     */
+    public var player:PlayerShip;
+
+
+    /**
      * Player score.
      */
-    var score:Int;
+    public var score:Int;
 
     
     /**
@@ -52,8 +59,9 @@ class PlayState extends FlxState
 
         //create instances
         spawner = new Spawner();
-        collision = new CollisionHandler(spawner.screenObjects, spawner.projectiles);
-        ui = new UI(spawner.player, score);
+        player = spawner.player;
+        collision = new CollisionHandler(this, spawner.screenObjects, spawner.projectiles);
+        ui = new UI(this);
         input = new InputHandler(spawner.player);
 
         //add objects to the play state

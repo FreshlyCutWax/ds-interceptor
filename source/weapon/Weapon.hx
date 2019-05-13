@@ -31,6 +31,13 @@ class Weapon extends FlxBasic
     private var _offset:Int;
 
 
+    /**
+     * Center of projectile on the x-axis.
+     * Used for spawning the projectile as close to the center as possible.
+     */
+    private var _centerX:Float;
+
+
     override public function new(Player:PlayerShip):Void{
         super();
         _player = Player;
@@ -47,10 +54,14 @@ class Weapon extends FlxBasic
 
     public function fire():Void{
         if (_cooldown.finished){
-            _spawnProjectile();
+            //set position
+            var posX = _player.position.x + ((_player.frameWidth / 2) - _centerX);
+            var posY = _player.position.y + _offset;
+
+            _spawnProjectile(posX, posY);
         }
     }//function fire
 
 
-    private function _spawnProjectile():Void {};
+    private function _spawnProjectile(x:Float, y:Float):Void {};
 }

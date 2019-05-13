@@ -5,6 +5,7 @@ import flixel.FlxSprite;
 import flixel.text.FlxText;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
+import PlayState;
 
 //game
 import screen.ship.PlayerShip;
@@ -12,15 +13,9 @@ import screen.ship.PlayerShip;
 class UI extends FlxSprite
 {
     /**
-     * Reference to the player's score.
+     * Reference to state.
      */
-    private var _score:Int;
-
-
-    /**
-     * Reference to player ship screen object to follow and track.
-     */
-    private var _player:PlayerShip;
+    private var _state:PlayState;
 
 
     /**
@@ -97,12 +92,11 @@ class UI extends FlxSprite
     ///////////////////////////////////////////////////////////////////
     //////////////////////////////methods//////////////////////////////
     ///////////////////////////////////////////////////////////////////
-    override public function new(?X:Float, ?Y:Float, Player:PlayerShip, Score:Int):Void{
+    override public function new(?X:Float, ?Y:Float, State:PlayState):Void{
         super(X, Y);
 
         //general
-        _player = Player;
-        _score = Score;
+        _state = State;
         alpha = 0.5;
 
         //position
@@ -114,7 +108,7 @@ class UI extends FlxSprite
 
         //offset positioning
         _offsetX = -16;
-        _offsetY = _player.frameHeight + 16;
+        _offsetY = _state.player.frameHeight + 16;
         _healthOffsetX = frameWidth + 16;
         _healthOffsetY = -16;
         _scoreOffsetX = 0;
@@ -167,7 +161,7 @@ class UI extends FlxSprite
      * Updates health text with current health value.
      */
     private function _updateHealth():Void{
-        var text = Std.string(_player.health);
+        var text = Std.string(_state.player.health);
         text += "%";
         healthText.text = text;
     }//function _updateHealth
@@ -177,7 +171,7 @@ class UI extends FlxSprite
      * Updates score text with current score value.
      */
     private function _updateScore():Void{
-        var text = Std.string(_score);
+        var text = Std.string(_state.score);
         scoreText.text = text;
     }//function _updateHealth
 
@@ -202,7 +196,7 @@ class UI extends FlxSprite
      * Tracks player position and sets UI position to player.
      */
     private function _trackPlayerPosition():Void{
-        _player.getPosition(position);
+        _state.player.getPosition(position);
 
         //ui position
         position.x += _offsetX;

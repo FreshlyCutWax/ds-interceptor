@@ -5,9 +5,11 @@ import flixel.FlxBasic;
 import flixel.FlxObject;
 import flixel.FlxG;
 import flixel.group.FlxGroup;
+import flixel.FlxState;
 
 //game
 import screen.projectile.Projectile;
+import screen.ship.PlayerShip;
 
 
 class CollisionHandler extends FlxBasic
@@ -30,10 +32,17 @@ class CollisionHandler extends FlxBasic
     public var damage:Float;
 
 
-    override function new(CollisionGroups:FlxGroup, ?Projectiles:FlxGroup):Void{
+    /**
+     * Reference to the play state.
+     */
+    private var _state:PlayState;
+
+
+    override function new(State:PlayState,  CollisionGroups:FlxGroup, ?Projectiles:FlxGroup):Void{
         super();
         _groups = CollisionGroups;
         _projectiles = Projectiles;
+        _state = State;
         damage = 25;
     }//constructor
 
@@ -60,6 +69,7 @@ class CollisionHandler extends FlxBasic
      * Deals damage dependent on the projectile.
      */
     private function _projectileDamage(object:FlxObject, projectile:Projectile):Void{
+        if (projectile.projected == _state.player) _state.score += 5;
         object.hurt(projectile.damage);
         projectile.kill();
     }//function _projectileDamage

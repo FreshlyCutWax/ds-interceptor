@@ -13,7 +13,7 @@ class Bullet extends Projectile
         speed = -500;
         damage = 25;
 
-        makeGraphic(5, 10, FlxColor.GRAY);
+        makeGraphic(5, 8, FlxColor.GRAY);
 
         velocity.set(0, speed);
     }//constructor

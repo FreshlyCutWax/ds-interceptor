@@ -17,6 +17,10 @@ class Cannon extends Weapon
         super(Player);
         _bullets = BulletPool;
         time = 0.2;
+
+        //get center of x for spawning
+        var object = _bullets.getFirstAvailable();
+        _centerX = -(object.frameWidth / 2);
     }//constructor
 
 
@@ -25,13 +29,10 @@ class Cannon extends Weapon
     }//update loop
 
 
-    override private function _spawnProjectile():Void{
+    override private function _spawnProjectile(x:Float, y:Float):Void{
         var bulletObject = _bullets.recycle();
-        
-        //set position
-        var posY = _player.position.y + _offset;
-        var posX = _player.position.x;
-        bulletObject.reset(posX, posY);
+        bulletObject.projected = _player;
+        bulletObject.reset(x, y);
 
         _cooldown.start(time);
     }//function _spawnProjectile
