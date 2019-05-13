@@ -4,6 +4,7 @@ import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
+import flixel.system.FlxAssets.FlxSoundAsset;
 
 class Ship extends FlxSprite
 {
@@ -35,6 +36,12 @@ class Ship extends FlxSprite
     public var speedY:Float;
 
 
+    /**
+     * Sound that plays on ship death.
+     */
+    private var _deathSound:FlxSoundAsset;
+
+
     override public function new(?X:Float, ?Y:Float, ?XBoundOffset:Int, ?YBoundOffset:Int):Void{
         super(X, Y);
 
@@ -42,6 +49,7 @@ class Ship extends FlxSprite
         solid = true;
         health = 100;
         shield = 0;
+        _deathSound = AssetPaths.explosion__wav;
 
         //load graphic
         frameWidth= 32;
@@ -63,6 +71,15 @@ class Ship extends FlxSprite
         _checkBounds();
         super.update(elapsed);
     }//update loop
+
+
+    /**
+     * Overrides kill function to add death sound.
+     */
+    override public function kill():Void{
+        super.kill();
+        FlxG.sound.play(_deathSound);
+    }//function kill
 
 
     /**

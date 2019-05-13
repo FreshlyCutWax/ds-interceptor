@@ -2,6 +2,8 @@ package weapon;
 
 import flixel.FlxBasic;
 import flixel.util.FlxTimer;
+import flixel.system.FlxAssets.FlxSoundAsset;
+import flixel.FlxG;
 import screen.ship.PlayerShip;
 
 class Weapon extends FlxBasic
@@ -36,6 +38,12 @@ class Weapon extends FlxBasic
      * Used for spawning the projectile as close to the center as possible.
      */
     private var _centerX:Float;
+
+
+    /**
+     * Sound that plays when weapon is activated.
+     */
+    private var _sound:FlxSoundAsset;
 
 
     override public function new(Player:PlayerShip):Void{

@@ -6,6 +6,7 @@ import flixel.FlxObject;
 import flixel.FlxG;
 import flixel.group.FlxGroup;
 import flixel.FlxState;
+import flixel.system.FlxAssets.FlxSoundAsset;
 
 //game
 import screen.projectile.Projectile;
@@ -38,11 +39,18 @@ class CollisionHandler extends FlxBasic
     private var _state:PlayState;
 
 
+    /**
+     * Damage sounds for collision.
+     */
+    private var _damageSound:FlxSoundAsset;
+
+
     override function new(State:PlayState,  CollisionGroups:FlxGroup, ?Projectiles:FlxGroup):Void{
         super();
         _groups = CollisionGroups;
         _projectiles = Projectiles;
         _state = State;
+        _damageSound = AssetPaths.clash__wav;
         damage = 25;
     }//constructor
 
@@ -61,6 +69,7 @@ class CollisionHandler extends FlxBasic
     private function _collisionDamage(object1:FlxObject, object2:FlxObject):Void{
         object1.hurt(damage);
         object2.hurt(damage);
+        FlxG.sound.play(_damageSound);
     }//function _damage
 
 
@@ -72,5 +81,6 @@ class CollisionHandler extends FlxBasic
         if (projectile.projected == _state.player) _state.score += 5;
         object.hurt(projectile.damage);
         projectile.kill();
+        FlxG.sound.play(_damageSound);
     }//function _projectileDamage
 }

@@ -1,6 +1,7 @@
 package weapon;
 
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.FlxG;
 import screen.ship.PlayerShip;
 import weapon.Weapon;
 import screen.projectile.Bullet;
@@ -16,6 +17,7 @@ class Cannon extends Weapon
     override public function new(Player:PlayerShip, BulletPool:FlxTypedGroup<Bullet>):Void{
         super(Player);
         _bullets = BulletPool;
+        _sound = AssetPaths.cannon__wav;
         time = 0.2;
 
         //get center of x for spawning
@@ -33,6 +35,8 @@ class Cannon extends Weapon
         var bulletObject = _bullets.recycle();
         bulletObject.projected = _player;
         bulletObject.reset(x, y);
+
+        FlxG.sound.play(_sound);
 
         _cooldown.start(time);
     }//function _spawnProjectile

@@ -5,6 +5,7 @@ import flixel.ui.FlxButton;
 import flixel.text.FlxText;
 import flixel.FlxG;
 import flixel.addons.display.FlxBackdrop;
+import flixel.system.FlxAssets.FlxSoundAsset;
 
 class MenuState extends FlxState
 {
@@ -44,6 +45,8 @@ class MenuState extends FlxState
 
 
     public function clickPlay():Void{
+        var clickSound = AssetPaths.select__wav;
+        FlxG.sound.play(clickSound);
         FlxG.switchState(new PlayState());
     }
 }

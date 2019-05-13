@@ -1,11 +1,11 @@
 package;
 
 import flixel.FlxState;
-import flixel.FlxSubState;
 import flixel.FlxG;
 import flixel.addons.display.FlxBackdrop;
 import screen.ui.UI;
 import screen.ship.PlayerShip;
+import flixel.system.FlxAssets.FlxSoundAsset;
 
 class PlayState extends FlxState
 {
@@ -51,13 +51,20 @@ class PlayState extends FlxState
     var input:InputHandler;
 
 
+    /**
+     * Sound that plays on game over.
+     */
+    var gameOverSound:FlxSoundAsset;
+
+
     ///////////////////////////////////////////////////////////////////
     //////////////////////////////methods//////////////////////////////
     ///////////////////////////////////////////////////////////////////
     override public function create():Void{
-        //set score
+        //general
         score = 0;
         lives = 0;
+        gameOverSound = AssetPaths.death__wav;
 
         //create instances
         spawner = new Spawner();
@@ -95,6 +102,9 @@ class PlayState extends FlxState
      * Check to see if game over condition is met.
      */
     public function checkGameOver():Void{
-        if (lives == 0 && !spawner.player.alive) openSubState(new GameOverState());
+        if (lives == 0 && !spawner.player.alive) {
+            FlxG.sound.play(gameOverSound);
+            FlxG.switchState(new GameOverState(0, score));
+        }
     }//function checkGameOver
 }
