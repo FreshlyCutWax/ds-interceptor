@@ -98,6 +98,7 @@ class UI extends FlxSprite
         //general
         _state = State;
         alpha = 0.5;
+        scrollFactor.set(0, 0);
 
         //position
         position = new FlxPoint();
@@ -124,6 +125,7 @@ class UI extends FlxSprite
         healthText.fieldWidth = 64;
         healthText.alignment = "left";
         healthText.alpha = alpha;
+        healthText.scrollFactor.set(0, 0);
 
         //score text
         scoreText = new FlxText();
@@ -131,16 +133,19 @@ class UI extends FlxSprite
         scoreText.fieldWidth = 64;
         scoreText.alignment = "center";
         scoreText.alpha = alpha;
+        scoreText.scrollFactor.set(0, 0);
 
         //primary weapon emblem
         primaryEmblem = new FlxSprite();
         primaryEmblem.makeGraphic(8, 16, FlxColor.RED);
         primaryEmblem.alpha = alpha;
+        primaryEmblem.scrollFactor.set(0, 0);
 
         //secondary weapon emblem
         secondaryEmblem = new FlxSprite();
         secondaryEmblem.makeGraphic(8, 16, FlxColor.BLUE);
         secondaryEmblem.alpha = alpha;
+        secondaryEmblem.scrollFactor.set(0, 0);
 
         //draw graphic
         makeGraphic(frameWidth, frameHeight, FlxColor.GRAY);

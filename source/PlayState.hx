@@ -2,6 +2,8 @@ package;
 
 import flixel.FlxState;
 import flixel.FlxSubState;
+import flixel.FlxG;
+import flixel.addons.display.FlxBackdrop;
 import screen.ui.UI;
 import screen.ship.PlayerShip;
 
@@ -64,22 +66,27 @@ class PlayState extends FlxState
         ui = new UI(this);
         input = new InputHandler(spawner.player);
 
+        //backgroud
+        var bg = new FlxBackdrop(AssetPaths.background__png, 0, 1, false, true);
+
         //add objects to the play state
+        add(bg);
         add(input);
+        add(spawner);
+        add(collision);
+        add(spawner.screenObjects);
+        add(spawner.projectiles);
         add(ui);
         add(ui.healthText);
         add(ui.scoreText);
         add(ui.primaryEmblem);
         add(ui.secondaryEmblem);
-        add(spawner);
-        add(collision);
-        add(spawner.screenObjects);
-        add(spawner.projectiles);
 	super.create();
     }
 
     override public function update(elapsed:Float):Void{    
         checkGameOver();
+        FlxG.camera.scroll.add(0, 5);
 	super.update(elapsed);
     }
 

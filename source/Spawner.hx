@@ -44,6 +44,7 @@ class Spawner extends FlxBasic
 
         //create instances
         player = new PlayerShip();
+        player.scrollFactor.set(0,0);
 
         //create groups
         screenObjects = new FlxGroup();
@@ -54,6 +55,7 @@ class Spawner extends FlxBasic
         //populate debris
         for (i in 1...100){
             var newDebris = new Debris();
+            newDebris.scrollFactor.set(0,0);
             newDebris.kill();
             debris.add(newDebris);
         }
@@ -61,6 +63,7 @@ class Spawner extends FlxBasic
         //populate bullets
         for (i in 1...200){
             var newBullet = new Bullet();
+            newBullet.scrollFactor.set(0,0);
             newBullet.kill();
             bullets.add(newBullet);
         }
